@@ -17,22 +17,23 @@ function secondsOrMinutes(millis) {
     return toSeconds(millis)+ "s";
 }
 
+function makeDeferredCall(time, fn) {
+    setTimeout(function() {
+        fn(secondsOrMinutes(time));
+    },time);
+}
+
+function execFns(millis, fns) {
+   makeDeferredCall(millis, fns.pop());
+   fns.forEach(function(fn, index) {
+        makeDeferredCall(millis/(Math.pow(2,index+1)),fn);
+   });
+}
+
 module.exports = {
     time: function(time, fns) {
         var millis = convertToMillis(time);
-
-        setTimeout(function() {
-            fns[0](secondsOrMinutes(millis/2));
-        }, millis/2);
-
-        setTimeout(function() {
-            fns[1](secondsOrMinutes(millis/4));
-        }, millis/4);
-        
-        setTimeout(function() {
-            fns[2](secondsOrMinutes(millis));
-        }, millis);
-
+        execFns(millis, fns);
 
     }   
 };
