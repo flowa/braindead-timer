@@ -1,6 +1,6 @@
 {
   "name": "braindead-timer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Just a brain dead timer. Executes callbacks at middle, two thirds gone and at end",
   "main": "main.js",
   "scripts": {

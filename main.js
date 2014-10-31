@@ -24,10 +24,12 @@ function makeDeferredCall(time, fn) {
 }
 
 function execFns(millis, fns) {
-   makeDeferredCall(millis, fns.pop());
-   fns.forEach(function(fn, index) {
-        makeDeferredCall(millis/(Math.pow(2,index+1)),fn);
-   });
+    makeDeferredCall(millis, fns.pop());
+    if (fns.length > 0) {
+        for (var i = 0; i < fns.length; i++) {
+            makeDeferredCall(millis/(Math.pow(2,i+1)),fns[i]);
+        }
+    }
 }
 
 module.exports = {
