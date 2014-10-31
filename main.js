@@ -17,17 +17,17 @@ function secondsOrMinutes(millis) {
     return toSeconds(millis)+ "s";
 }
 
-function makeDeferredCall(time, fn) {
+function makeDeferredCall(overall, time, fn) {
     setTimeout(function() {
         fn(secondsOrMinutes(time));
-    },time);
+    },overall-time);
 }
 
 function execFns(millis, fns) {
-    makeDeferredCall(millis, fns.pop());
+    makeDeferredCall(millis,0, fns.pop());
     if (fns.length > 0) {
         for (var i = 0; i < fns.length; i++) {
-            makeDeferredCall(millis/(Math.pow(2,i+1)),fns[i]);
+            makeDeferredCall(millis,millis/(Math.pow(2,i+1)),fns[i]);
         }
     }
 }

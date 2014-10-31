@@ -12,7 +12,7 @@ describe("Main test set", function() {
     
     it("Executes first and only callback after full time when only one callback is given", function(done) {
         this.timeout(7000);
-        var assert = createAssert("6s", done);
+        var assert = createAssert("0s", done);
 
         timer.time(0.1, [
             assert
@@ -42,7 +42,7 @@ describe("Main test set", function() {
     
     it("Executes third callback on 1m when minute is given, return original value in minutes", function(done) {
         this.timeout(61000);
-        var assert = createAssert("60s", done);
+        var assert = createAssert("0s", done);
         timer.time(1, [
             function() {},
             function() {},
